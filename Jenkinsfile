@@ -55,6 +55,14 @@ pipeline {
             }
         }
 
+        stage("Quality Gate") {
+            steps {
+              timeout(time: 30, unit: 'MINUTES') {
+                waitForQualityGate abortPipeline: true
+              }
+            }
+        }
+
         stage('Nexus Artifact Upload'){
             steps{
                 script{
