@@ -41,8 +41,15 @@ pipeline {
                 """
             }
         }
+        stage('Docker build'){
+            steps{
+                sh """
+                    docker build -t backend:${appVersion} .
+                """
+            }
+        }
         
-        stage('Sonar Scan'){
+        /* stage('Sonar Scan'){
             environment {
                 scannerHome = tool 'sonar-6.0' //referring scanner CLI
             }
@@ -61,9 +68,9 @@ pipeline {
                 waitForQualityGate abortPipeline: true
               }
             }
-        }
+        } */
 
-        stage('Nexus Artifact Upload'){
+        /* stage('Nexus Artifact Upload'){
             steps{
                 script{
                     nexusArtifactUploader(
@@ -83,8 +90,8 @@ pipeline {
                     )
                 }
             }
-        }
-        stage('Deploy'){
+        } */
+        /* stage('Deploy'){
             when{
                 expression{
                     params.deploy
@@ -98,7 +105,7 @@ pipeline {
                     build job: 'backend-deploy', parameters: params, wait: false
                 }
             }
-        }
+        } */
     }
     post { 
         always { 
