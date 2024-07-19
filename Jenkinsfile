@@ -7,5 +7,5 @@ def configMap = [
     component: "backend",
     project: "expense"
 ]
-echo "environment: $env"
+sh "environment: $env"
 //pipelineDecission.decidePipeline(configMap)
